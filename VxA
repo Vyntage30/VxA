@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Anu ❤️</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: #1a1a1a;
+        overflow: hidden;
+        font-family: 'Georgia', serif;
+        color: white;
+        text-align: center;
+    }
+
+    /* Floating hearts background */
+    .heart {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: red;
+        transform: rotate(45deg);
+        animation: floatUp 10s linear infinite;
+        opacity: 0.7;
+    }
+    .heart:before, .heart:after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: red;
+        border-radius: 50%;
+    }
+    .heart:before { top: -10px; left: 0; }
+    .heart:after { left: -10px; top: 0; }
+
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) rotate(45deg); }
+        100% { transform: translateY(-20vh) rotate(45deg); }
+    }
+
+    /* Glowing pulse intro */
+    #pulse {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 50px;
+        animation: pulseGlow 2s ease-out forwards;
+        opacity: 0;
+    }
+
+    @keyframes pulseGlow {
+        0% { opacity: 0; transform: scale(0.5); }
+        50% { opacity: 1; transform: scale(1.2); }
+        100% { opacity: 0; transform: scale(1); }
+    }
+
+    /* Main content */
+    #content {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        animation: fadeIn 3s ease forwards;
+        animation-delay: 2s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Loading bar */
+    #bar {
+        width: 300px;
+        height: 20px;
+        background: #ffb6c1;
+        border-radius: 20px;
+        margin: 20px auto;
+        overflow: hidden;
+    }
+
+    #fill {
+        height: 100%;
+        width: 0%;
+        background: #ff69b4;
+        border-radius: 20px;
+        transition: width 9s linear;
+    }
+
+    /* Final message */
+    #final {
+        margin-top: 20px;
+        font-size: 28px;
+        opacity: 0;
+        animation: glowIn 3s ease forwards;
+    }
+
+    @keyframes glowIn {
+        from { opacity: 0; text-shadow: 0 0 0px red; }
+        to { opacity: 1; text-shadow: 0 0 15px red; }
+    }
+</style>
+</head>
+<body>
+
+<div id="pulse">❤️</div>
+
+<!-- Floating hearts -->
+<script>
+for (let i = 0; i < 30; i++) {
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDelay = Math.random() * 10 + "s";
+    h.style.opacity = Math.random() * 0.8 + 0.2;
+    document.body.appendChild(h);
+}
+</script>
+
+<div id="content">
+    <h1 style="font-size:40px;">Loading… My Love for Anu</h1>
+
+    <div id="bar">
+        <div id="fill"></div>
+    </div>
+
+    <h2 id="status">0%</h2>
+</div>
+
+<div id="final"></div>
+
+<script>
+setTimeout(() => {
+    document.getElementById("fill").style.width = "100%";
+
+    let percent = 0;
+    let interval = setInterval(() => {
+        percent++;
+        document.getElementById("status").innerText = percent + "%";
+        if (percent === 100) {
+            clearInterval(interval);
+
+            // Cute chime sound
+            let audio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b4e3b0c57.mp3?filename=correct-2-46134.mp3");
+            audio.play();
+
+            document.getElementById("status").innerText = "Status: Permanent ❤️";
+
+            setTimeout(() => {
+                document.getElementById("final").innerHTML = "With love, Vraj ❤️";
+            }, 1500);
+        }
+    }, 90);
+}, 2000);
+</script>
+
+</body>
+</html>
